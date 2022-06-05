@@ -1,34 +1,35 @@
 server:
-  port: ${SERVER_PORT}
+  port: ${SERVER_PORT:7878}
 spring:
+  security:
+    user:
+      name: ${SPRING_SECURITY_USER_NAME:user@cloud}
+      password: ${SPRING_SECURITY_PASSWORD:password@cloud.vn}
   cloud:
     config:
       server:
+#        encrypt:
+#          enabled: false
         git:
-          ###------ remote repo
-          uri: ${SPRING_CLOUD_CONFIG_SERVER_GIT_URI}
+          ###------ for remote repo
+#          uri: ${SPRING_CLOUD_CONFIG_SERVER_GIT_URI}
+#          force-pull: true
+#          search-paths: '{application}/{profile}'
+#          username: ${SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME}
+#          password: ${SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD}
+#          default-label: master
+
+          ###------ for local file repo
+          uri: file:///C:/Users/link/Desktop/test_spring_cloud/config-repo
+          default-label: master
           force-pull: true
           search-paths: '{application}/{profile}'
-          username: ${SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME}
-          password: ${SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD}
-          default-label: master
-
-          ###------ local file repo
-#          uri: file:///${user.home}/Desktop/test_spring_cloud/config-repo
-#          search-paths: '{application}/{profile}/{label}'
-#          default-label: master
-  security:
-    user:
-      name: ${SPRING_SECURITY_USER_NAME}
-      password: ${SPRING_SECURITY_PASSWORD}
-###------ for symmetric cryptography
 encrypt:
-  key: ${ENCRYPT_KEY}
+  ###------ for symmetric cryptography
+  #key: ${ENCRYPT_KEY:9y$B&E)H@McQfTjWnZr4u7w!z%C*F-JaNdRgUkXp2s5v8y/A?D(G+KbPeShVmYq3}
 
-###------ for asymmetric cryptography
-#encrypt:
-#  key-store:
-#    location: file:///C:/Users/linhtn/Desktop/test_spring_cloud/config-server.jks
-#    password: letmein
-#    alias: mytestkey
-#    secret: changeme
+  ###------ for asymmetric cryptography
+  key-store:
+    location: classpath:key/myApiTutorialKey.jks
+    password: a1b2c3d4
+    alias: myApiTutorialKey
