@@ -8,8 +8,8 @@ spring:
   cloud:
     config:
       server:
-#        encrypt:
-#          enabled: false
+        encrypt:
+          enabled: false
         git:
           ###------ for remote repo
 #          uri: ${SPRING_CLOUD_CONFIG_SERVER_GIT_URI}
@@ -24,12 +24,3 @@ spring:
           default-label: master
           force-pull: true
           search-paths: '{application}/{profile}'
-encrypt:
-  ###------ for symmetric cryptography
-  #key: ${ENCRYPT_KEY:9y$B&E)H@McQfTjWnZr4u7w!z%C*F-JaNdRgUkXp2s5v8y/A?D(G+KbPeShVmYq3}
-
-  ###------ for asymmetric cryptography
-  key-store:
-    location: classpath:key/myApiTutorialKey.jks
-    password: a1b2c3d4
-    alias: myApiTutorialKey
