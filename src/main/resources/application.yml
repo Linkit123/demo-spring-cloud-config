@@ -1,0 +1,34 @@
+server:
+  port: ${SERVER_PORT}
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          ###------ remote repo
+          uri: ${SPRING_CLOUD_CONFIG_SERVER_GIT_URI}
+          force-pull: true
+          search-paths: '{application}/{profile}'
+          username: ${SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME}
+          password: ${SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD}
+          default-label: master
+
+          ###------ local file repo
+#          uri: file:///${user.home}/Desktop/test_spring_cloud/config-repo
+#          search-paths: '{application}/{profile}/{label}'
+#          default-label: master
+  security:
+    user:
+      name: ${SPRING_SECURITY_USER_NAME}
+      password: ${SPRING_SECURITY_PASSWORD}
+###------ for symmetric cryptography
+encrypt:
+  key: ${ENCRYPT_KEY}
+
+###------ for asymmetric cryptography
+#encrypt:
+#  key-store:
+#    location: file:///C:/Users/linhtn/Desktop/test_spring_cloud/config-server.jks
+#    password: letmein
+#    alias: mytestkey
+#    secret: changeme
